@@ -30,6 +30,9 @@ var openState = {
 
         game.load.atlas('explosion_atlas', 'assets/spritesheets/explosions/explosionsheet.png', 'assets/spritesheets/explosions/explosionjson.json');
         game.load.atlas('playerexplosion_atlas', 'assets/spritesheets/explosions/explosionsplayer.png', 'assets/spritesheets/explosions/explosionsplayer.json');
+        game.load.atlas('bigufoexplosion', 'assets/spritesheets/explosions/bigexplosion/bigufoexplosionsheet.png', 'assets/spritesheets/explosions/bigexplosion/bigufoexplosionsheet.json');
+        //game.load.atlas();
+
 
         game.load.image('bigufo', 'assets/bigufo.png');
 
