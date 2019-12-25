@@ -271,7 +271,9 @@ var openState = {
     }
 
     },
-
+    updateScore: function (points){
+        score += points;
+    },
     clearEnemyField: function () {
         if (game.time.now > nextClearTotalObj) {
             //var enemy;

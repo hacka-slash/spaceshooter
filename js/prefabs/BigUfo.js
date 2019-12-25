@@ -32,7 +32,7 @@ var BigUfo = function(game, x, y,){
     this.tweenStopPoint.y = game.world.centerY - 100;
     this.isHit = false;
     this.blinkCounter = 0;
-    this.hitPoints = 4;
+    this.hitPoints = 20;
 
     var originX = this.game.rnd.integerInRange(0, game.width);
     this.x = originX;
@@ -45,7 +45,7 @@ var BigUfo = function(game, x, y,){
         //DEBUGGING:
         //this.logic = "shootLasers";
 
-    this.score = 4;
+    this.score = 6;
     this.isDead = false;
 
     //if(or)
@@ -144,6 +144,7 @@ BigUfo.prototype.update = function(){
 
         if(this.hitPoints < 0){
             this.alpha = 1;
+            openState.updateScore(this.score);
             this.killThis();
         }
         
