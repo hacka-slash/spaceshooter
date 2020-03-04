@@ -23,3 +23,7 @@
  ..SpriteCountCheck increments on every gameObjects.add() but we must decrement on everytime the Object is destroyed. Also check where they go off screen to be sure they are 'destroyed()' and the decrement happens. 
 
  ..Within the sprite's 'killThis()' The sprite.kill() or this.destroy() does not stop the sprite from updating and using up memory.. Perhaps an outside function that goes thru all gameObjects nd deletes them by changing them to null?
+
+
+ ######## Fix-Player-Cannot-Go-Off-Screen:
+  ..Within update.stickIsDown(), and checkInput we check the user.x if it is off screen and set the velocity to '0' if so and push the user.x away from the screen so that the velocity does not stay 0.

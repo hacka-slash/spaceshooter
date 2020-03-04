@@ -253,7 +253,26 @@ var openState = {
         var maxSpeed = 400;
 
         if (stick.isDown) {
-            this.physics.arcade.velocityFromRotation(stick.rotation, stick.force * maxSpeed, player.body.velocity);
+            if(player.x - player.width/2 <= 0){
+                //player.x = 0 + player.width/2;
+                player.body.velocity.set(0);
+                player.x += 5;
+            }else if(player.x + player.width/2 >= game.width){
+                player.body.velocity.set(0);
+                player.x -= 5;
+            }
+            else if(player.body.y - player.height/2 <= 0){
+                player.body.velocity.set(0);
+                player.y += 5;
+            }
+            else if(player.body.y + player.height/2 >= game.height){
+                player.body.velocity.set(0);
+                player.y -= 10;
+            }
+            else{
+                this.physics.arcade.velocityFromRotation(stick.rotation, stick.force * maxSpeed, player.body.velocity);
+            }
+            
             //this.sprite.rotation = stick.rotation;
         }
         else if (!stick.isDown && !game.input.keyboard.isDown()) {
@@ -454,12 +473,12 @@ var openState = {
             else{
                 //Must handle the user clicking to the screen get those coordinates,
         //then we will use those coords to call player = game.add.sprite()
-                var style = { font: "65px Arial", fill: "#ff0044", align: "center" };
+                var style = { font: "65px Arial", fill: "#008B8B", align: "center" };
                 respawnText = game.add.text(game.world.centerX, game.world.centerY, "Click Where To Respawn", style);
                 respawnText.anchor.set(0.5);
-                respawnText.alpha = 0.1;
+                //respawnText.alpha = 0.1;
 
-                respawnTextAnimation = game.add.tween(text).to( { alpha: 1 }, 3000, "Linear", true);
+                let respawnTextAnimation = game.add.tween(text).to( { alpha: 1 }, 1000, "Linear", true);
                 isWaitingToRespawn = true;
                 playerHitTimeOut = window.setTimeout(() => {
                    //alert('yo');
@@ -806,94 +825,113 @@ var openState = {
         //OR MAYBE CAN USE A SET INTERVAL()
     },
     checkInput: function () {
-        if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-            //console.log("space");
-            this.fireWeapon();
+        if(player.x - player.width/2 <= 0){
+            //player.x = 0 + player.width/2;
+            player.body.velocity.set(0);
+            player.x += 5;
+        }else if(player.x + player.width/2 >= game.width){
+            player.body.velocity.set(0);
+            player.x -= 5;
         }
+        else if(player.body.y - player.height/2 <= 0){
+            player.body.velocity.set(0);
+            player.y += 5;
+        }
+        else if(player.body.y + player.height/2 >= game.height){
+            player.body.velocity.set(0);
+            player.y -= 10;
+        }else{
 
-        if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-            if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN)) {
-                player.body.velocity.x = 400;
-                player.body.velocity.y = 400;
+        
+            if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+                //console.log("space");
+                this.fireWeapon();
             }
-            else if (game.input.keyboard.isDown(Phaser.Keyboard.UP)) {
-                player.body.velocity.x = 400;
-                player.body.velocity.y = -400;
-            }
-            else {
 
-                if (player.body.velocity.x == -400) {
-                    player.body.velocity.x *= -1;
-                    player.body.velocity.x = 0;
-                } else {
+            if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+                if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN)) {
                     player.body.velocity.x = 400;
-                    player.body.velocity.y = 0;
+                    player.body.velocity.y = 400;
                 }
-            }
-            isKeyDown = true;
-            //console.log(sprite.body.velocity.x);
-        }
-        else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN)) {
-            if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
-                //if(sprite.body.velocity.x == 400){
-                //sprite.body.velocity.x *= -1;
-                //}
-                player.body.velocity.x = -400;
-                player.body.velocity.y = 400;
-            }
-            else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+                else if (game.input.keyboard.isDown(Phaser.Keyboard.UP)) {
+                    player.body.velocity.x = 400;
+                    player.body.velocity.y = -400;
+                }
+                else {
 
-                player.body.velocity.x = 400;
-                player.body.velocity.y = 400;
-            }
-            else {
-                player.body.velocity.y = 400;
-                player.body.velocity.x = 0;
-            }
-            isKeyDown = true;
-        }
-        /*else if(game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
-            
-        }*/
-        else if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
-            if (game.input.keyboard.isDown(Phaser.Keyboard.UP)) {
-                player.body.velocity.x = -400;
-                player.body.velocity.y = -400;
+                    if (player.body.velocity.x == -400) {
+                        player.body.velocity.x *= -1;
+                        player.body.velocity.x = 0;
+                    } else {
+                        player.body.velocity.x = 400;
+                        player.body.velocity.y = 0;
+                    }
+                }
+                isKeyDown = true;
+                //console.log(sprite.body.velocity.x);
             }
             else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN)) {
-                player.body.velocity.x = -400;
-                player.body.velocity.y = 400;
-            } else {
-                if (player.body.velocity.x == 400) {
-                    player.body.velocity.x *= -1;
-                    player.body.velocity.x = 0;
-                } else {
+                if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
+                    //if(sprite.body.velocity.x == 400){
+                    //sprite.body.velocity.x *= -1;
+                    //}
                     player.body.velocity.x = -400;
-                    player.body.velocity.y = 0;
+                    player.body.velocity.y = 400;
                 }
-            }
-            isKeyDown = true;
-        }
-        else if (game.input.keyboard.isDown(Phaser.Keyboard.UP)) {
-            if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
-                player.body.velocity.x = -400;
-                player.body.velocity.y = -400;
-            }
-            if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-                player.body.velocity.x = 400;
-                player.body.velocity.y = -400;
-            }
-            else {
-                player.body.velocity.x = 0;
-                player.body.velocity.y = -400;
+                else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+
+                    player.body.velocity.x = 400;
+                    player.body.velocity.y = 400;
+                }
+                else {
+                    player.body.velocity.y = 400;
+                    player.body.velocity.x = 0;
+                }
                 isKeyDown = true;
             }
-        }
-        /*else if(game.input.keyboard.isDown(Phaser.Keyboard.UP)){
-            
-        }*/
-        else {
-            isKeyDown = false;
+            /*else if(game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
+                
+            }*/
+            else if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
+                if (game.input.keyboard.isDown(Phaser.Keyboard.UP)) {
+                    player.body.velocity.x = -400;
+                    player.body.velocity.y = -400;
+                }
+                else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN)) {
+                    player.body.velocity.x = -400;
+                    player.body.velocity.y = 400;
+                } else {
+                    if (player.body.velocity.x == 400) {
+                        player.body.velocity.x *= -1;
+                        player.body.velocity.x = 0;
+                    } else {
+                        player.body.velocity.x = -400;
+                        player.body.velocity.y = 0;
+                    }
+                }
+                isKeyDown = true;
+            }
+            else if (game.input.keyboard.isDown(Phaser.Keyboard.UP)) {
+                if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
+                    player.body.velocity.x = -400;
+                    player.body.velocity.y = -400;
+                }
+                if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+                    player.body.velocity.x = 400;
+                    player.body.velocity.y = -400;
+                }
+                else {
+                    player.body.velocity.x = 0;
+                    player.body.velocity.y = -400;
+                    isKeyDown = true;
+                }
+            }
+            /*else if(game.input.keyboard.isDown(Phaser.Keyboard.UP)){
+                
+            }*/
+            else {
+                isKeyDown = false;
+            }
         }
     },
     fireWeapon: function () {
