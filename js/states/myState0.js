@@ -293,7 +293,7 @@ var openState = {
 
     spriteCountCheck: function(){
         //console.log(enemySpriteCount);
-        if(enemySpriteCount < 55){
+        if(enemySpriteCount < 35){
             enemySpriteCount++;
             return true;
         }
