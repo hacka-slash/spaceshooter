@@ -1,10 +1,10 @@
 {
   "name": "spaceshooter",
   "version": "1.0.0",
-  "description": "",
+  "description": "..*To deploy to Netlify, used command: git push -u origin --force master:netlify-deploy",
   "main": "js/main.js",
   "scripts": {
-    "start": "node js/main.js",
+    "start": "nodemon server.js",
     "open": "start http://localhost:4000"
   },
   "author": "",
@@ -13,7 +13,16 @@
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.7.12",
+    "mongoose": "^5.9.3",
     "nodemon": "^1.19.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hacka-slash/spaceshooter.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/hacka-slash/spaceshooter/issues"
+  },
+  "homepage": "https://github.com/hacka-slash/spaceshooter#readme"
 }

@@ -13,6 +13,11 @@
 
  ######### Login-Logic:
  ..Must create a server.js file
+ ..Ok, ran into a hiccup. Created my server.js via npm install express, and app.listen and my home route.
+    ..The home route serves up the index file via res.sendFile(__dirname + "/index.html"). It serves the html but it cannot find the < script> tags needed to have the phaser code working..
+    ..I need to find a way to implement require('phaser')(npm install phaser?), require('myState0.js') etc...  Must export these modules.
+        ..Phaser3?
+        
 
 
  ######## Sprite-limit:
@@ -27,3 +32,9 @@
 
  ######## Fix-Player-Cannot-Go-Off-Screen:
   ..Within update.stickIsDown(), and checkInput we check the user.x if it is off screen and set the velocity to '0' if so and push the user.x away from the screen so that the velocity does not stay 0.
+
+  can u talk
+
+  why the name
+
+
