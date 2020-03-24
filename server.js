@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const requireAuth = require('./js/middlewares/requireAuth')
 
 const mongoUri = 'mongodb+srv://pmhoff:100891@cluster0-64jtu.mongodb.net/Phaser-Projects?retryWrites=true&w=majority';
 
@@ -26,10 +27,12 @@ mongoose.connection.on('error', () => {
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/index.html");
+    //console.log(`Your Email: ${req.user.email}`);
 });
 
 app.get('/js/phaser.min.js', (req, res) => {
     res.sendFile(__dirname + "/js/phaser.min.js");
+    
 });
 
 app.get('/js/prefabs/BigUfo.js', (req, res) => {
@@ -55,6 +58,15 @@ app.get('/js/states/changeStates.js', (req, res) => {
 app.get('/js/states/main.js', (req, res) => {
     res.sendFile(__dirname + "/js/states/main.js");
 });
+
+app.get('/js/states/signIn.js', (req, res) => {
+    res.sendFile(__dirname + "/js/states/signIn.js");
+});
+
+app.get('/js/states/signUp.js', (req, res) => {
+    res.sendFile(__dirname + "/js/states/signUp.js");
+});
+
 
 app.get('/js/phaser-virtual-joystick.min.js', (req, res) => {
     res.sendFile(__dirname + "/js/phaser-virtual-joystick.min.js");
@@ -95,6 +107,8 @@ app.get('/assets/mybuttons/about.png', (req, res) => {
 app.get('/assets/mytext/logo.png', (req, res) => {
     res.sendFile(__dirname + "/assets/mytext/logo.png");
 });
+
+
 
 
 
@@ -176,6 +190,14 @@ app.get('/assets/mytext/arcade.xml', (req, res) => {
     res.sendFile(__dirname + "/assets/mytext/arcade.xml");
 });
 
+//LOG-IN;
+app.get('/assets/blackbox.png', (req, res) => {
+    res.sendFile(__dirname + "/assets/blackbox.png");
+});
+
+app.get('/assets/mybuttons/signin.png', (req, res) => {
+    res.sendFile(__dirname + "/assets/mybuttons/signin.png");
+});
 
 app.listen(2000, () => {
     console.log("Hellooooo World!");
