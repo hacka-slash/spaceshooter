@@ -7,6 +7,8 @@ game.state.add('mainMenu', mainMenu);
 game.state.add('gameOver', gameOver);
 game.state.add('signIn', signIn);
 game.state.add('signUp', signUp)
+game.state.add('startMenu', startMenu);
 
 //game.state.start('mainMenu');
-game.state.start('signIn');
+//game.state.start('signUp');
+game.state.start('startMenu', startMenu);

@@ -6,14 +6,16 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 router.post('/signup', async (req, res) => {
-    const { email, password } = req.body
+    const { username, password } = req.body
+    //console.log(req.body);
 
     try{
-        const user = new User({email, password});
+        const user = new User({username, password});
+        //console.log(user);
         await user.save();
 
-        const token = jwt.sign({userId: user._id}, 'MY_SECRET_KEY');
-        res.send({token});
+        //const token = jwt.sign({userId: user._id}, 'MY_SECRET_KEY');
+        //res.send({token});
         //console.log(req.body);
     }catch(err){
         return res.status(422).send(err.message);
@@ -21,22 +23,23 @@ router.post('/signup', async (req, res) => {
 });
 
 router.post('/signin', async (req, res) => {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
-    if(!email || !password){
+    if(!username || !password){
         return res.status(422).send({error: 'Must provide an email and password'})
     }
 
-    const user = await User.findOne({email});
+    const user = await User.findOne({username});
 
     if(!user){
-        return res.status(404).send({error: 'Email not found'});
+        return res.status(404).send({error: 'A user by that name is not found'});
     }
 
     try{
         await user.comparePassword(password);
-        const token = jwt.sign({userId: user._id}, 'MY_SECRET_KEY');
-        res.send({token});
+        //const token = jwt.sign({userId: user._id}, 'MY_SECRET_KEY');
+        //res.send({token});
+        res.send("Found it!")
     }catch(err){
         return res.status(422).send({error: 'Invalid password or email'})
     }

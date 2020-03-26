@@ -132,6 +132,14 @@ var openState = {
         game.add.tween(player).to({ y: game.world.centerY + 100 }, 1000, Phaser.Linear, true);
 
         score = 0;
+
+        if(isLoggedIn){
+            let name = game.add.text(20, 25, globalName);
+            name.addColor('#fff', 0);
+            name.font = 'Revalia';
+            name.fontSize = 16;
+        }
+
         text = game.add.text(20, 40, "Score: " + score);
         //text.anchor.setTo(0.5);
         text.addColor('#ffffff', 0);

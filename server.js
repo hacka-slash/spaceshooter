@@ -67,6 +67,10 @@ app.get('/js/states/signUp.js', (req, res) => {
     res.sendFile(__dirname + "/js/states/signUp.js");
 });
 
+app.get('/js/states/startMenu.js', (req, res) => {
+    res.sendFile(__dirname + "/js/states/startMenu.js");
+});
+
 
 app.get('/js/phaser-virtual-joystick.min.js', (req, res) => {
     res.sendFile(__dirname + "/js/phaser-virtual-joystick.min.js");
@@ -108,6 +112,22 @@ app.get('/assets/mytext/logo.png', (req, res) => {
     res.sendFile(__dirname + "/assets/mytext/logo.png");
 });
 
+app.get('/assets/mytext/logo.png', (req, res) => {
+    res.sendFile(__dirname + "/assets/mytext/logo.png");
+});
+
+app.get('/assets/mybuttons/back.png', (req, res) => {
+    res.sendFile(__dirname + "/assets/mybuttons/back.png");
+});
+
+
+app.get('/assets/mybuttons/back.png', (req, res) => {
+    res.sendFile(__dirname + "/assets/mybuttons/back.png");
+});
+
+app.get('/assets/mybuttons/play.png', (req, res) => {
+    res.sendFile(__dirname + "/assets/mybuttons/play.png");
+});
 
 
 
@@ -197,6 +217,10 @@ app.get('/assets/blackbox.png', (req, res) => {
 
 app.get('/assets/mybuttons/signin.png', (req, res) => {
     res.sendFile(__dirname + "/assets/mybuttons/signin.png");
+});
+
+app.get('/assets/mybuttons/signup.png', (req, res) => {
+    res.sendFile(__dirname + "/assets/mybuttons/signup.png");
 });
 
 app.listen(2000, () => {

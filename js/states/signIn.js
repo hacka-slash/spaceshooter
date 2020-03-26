@@ -1,5 +1,5 @@
 //alert("hello");
-var startButton, starfield, startText, startStyle, text, aboutButton, title, labelUsername, labelPassword, userNameBox, passwordBox, signInBtn, userName, password, userNameText, passwordText;
+var startButton, starfield, startText, startStyle, text, aboutButton, title, labelUsername, labelPassword, userNameBox, passwordBox, signInBtn, userName, password, userNameText, passwordText, backBtn, globalName;
 
 var signIn = {
     init: function () {
@@ -14,6 +14,8 @@ var signIn = {
         game.load.image('title', 'assets/mytext/logo.png');
         game.load.image('textbox', 'assets/blackbox.png')
         game.load.image('signInBtn', 'assets/mybuttons/signin.png', 90, 35);
+        game.load.image('backBtn', 'assets/mybuttons/back.png', 193, 71);
+
 
     },
     create: function(game){
@@ -33,20 +35,20 @@ var signIn = {
         // aboutButton = game.add.button(game.width/2, startButton.y + startButton.height + 10, 'abtbtn', this.about, this, 2, 1, 0);
         // aboutButton.anchor.setTo(0.5,0.5);
 
-        title = game.add.text(game.world.centerX, game.world.centerY - 100, 'Please Sign In');
-        title.anchor.setTo(0.5,0.5);
+        // title = game.add.text(game.world.centerX, game.world.centerY - 100, 'Please Sign In');
+        // title.anchor.setTo(0.5,0.5);
 
-        //	Font style
-        title.font = 'Arial Black';
-        title.fontSize = 50;
-        title.fontWeight = 'bold';
+        // //	Font style
+        // title.font = 'Arial Black';
+        // title.fontSize = 50;
+        // title.fontWeight = 'bold';
 
-        //	Stroke color and thickness
-        title.stroke = '#000000';
-        title.strokeThickness = 6;
-        title.fill = 'purple';
+        // //	Stroke color and thickness
+        // title.stroke = '#000000';
+        // title.strokeThickness = 6;
+        // title.fill = 'purple';
 
-        labelUsername = game.add.text(20, title.y + 100, 'Username:');
+        labelUsername = game.add.text(20, 200, 'Username:');
         //labelUsername.anchor.setTo(0.5,0.5);
 
         //	Font style
@@ -79,10 +81,15 @@ var signIn = {
         passwordBox = game.add.button(labelPassword.x + labelPassword.width + 14, labelPassword.y, 'textbox', this.fillPassword, this, 2, 1, 0);
         passwordBox.width += 75;
 
-        signIn = game.add.button(game.world.centerX, game.world.height - 50, 'signInBtn', () => {alert("hello");}, this, 2, 1, 0);
+        signIn = game.add.button(game.world.centerX, game.world.height - 50, 'signInBtn', this.signIn, this, 2, 1, 0);
         signIn.anchor.setTo(0.5,0.5);
         signIn.width = 100;
         signIn.height = 50;
+
+        backBtn = game.add.button(100, signIn.y, 'backBtn', () => {game.state.start('startMenu')}, this, 2, 1, 0);
+        backBtn.anchor.setTo(0.5,0.5);
+        backBtn.width = 60;
+        backBtn.height = 60;
 
         
 
@@ -157,6 +164,39 @@ var signIn = {
         //title.strokeThickness = 6;
         passwordText.fill = '#fff';
         //alert('yo');
+    },
+    ////NOT READY TO COMPARE IF USERNAME PASSWORD MATCHES.
+    signIn: async function(){
+        //alert("aYOOOOO!")
+        const url = 'http://localhost:2000/signin'
+        const data = {
+            username: username,
+            password: password
+        }
+        try{
+        await fetch(url, {
+            method: 'post',
+            body: JSON.stringify(data),
+            headers: data ? {'Content-type': 'application/json'}: {}
+        }
+        ).then(response => {
+            console.log(response);
+            //alert(response);
+            if(response.status==404)
+                alert("Cannot Find That Person!")
+            if(response.status == 200){
+                alert("You are logged in")
+                isLoggedIn = true;
+                globalName = username;
+                game.state.start('open');
+            }
+        });
+        }catch(err){
+            console.log(err);
+            alert("Error Logging In")
+        }
+        
+
     }
 
 };
